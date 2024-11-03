@@ -4,6 +4,6 @@ import com.scrum.restaurante.domain.model.Mesa;
 
 import java.util.List;
 
-public interface MesaRepository {
+public interface MesaRepositoryPort {
     public List<Mesa> listarMesas();
 }

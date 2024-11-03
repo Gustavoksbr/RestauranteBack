@@ -1,5 +1,8 @@
 package com.scrum.restaurante.domain.model;
 
+import lombok.Data;
+
+@Data
 public class ItemComanda {
     private long id;
     private long idComanda;

@@ -4,6 +4,6 @@ import com.scrum.restaurante.domain.model.Produto;
 
 import java.util.List;
 
-public interface ProdutoRepository {
+public interface ProdutoRepositoryPort {
     public List<Produto> listarProdutos();
 }

@@ -4,7 +4,7 @@ import com.scrum.restaurante.domain.model.ItemComanda;
 
 import java.util.List;
 
-public interface ItemComandaRepository {
+public interface ItemComandaRepositoryPort {
     public List<ItemComanda> listarItensDaComanda(Long idComanda);
     public void adicionarItemComanda(ItemComanda itemComanda);
     public void removerItemComanda(Long idItemComanda);
