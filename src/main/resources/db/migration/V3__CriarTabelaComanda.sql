@@ -1,0 +1,7 @@
+CREATE TABLE Comanda (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_mesa INT NOT NULL,
+    pago BOOLEAN DEFAULT FALSE,
+    total DECIMAL(10, 2) DEFAULT 0.00,
+    FOREIGN KEY (id_mesa) REFERENCES Mesa(id)
+);

@@ -1,0 +1,4 @@
+CREATE TABLE Mesa (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    quantidade_comanda INT DEFAULT 0
+);
