@@ -1,5 +1,9 @@
 package com.scrum.restaurante.domain.ports.services;
 
+import com.scrum.restaurante.domain.model.Produto;
+
+import java.util.List;
+
 public interface ProdutoServicePort {
-    public void listarProdutos();// endpoint: GET /produto
+    public List<Produto> listarProdutos();// endpoint: GET /produto
 }
