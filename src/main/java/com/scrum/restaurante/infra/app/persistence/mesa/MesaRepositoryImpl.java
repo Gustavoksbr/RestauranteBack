@@ -20,4 +20,9 @@ public class MesaRepositoryImpl implements MesaRepositoryPort {
                 .map(MesaEntity::toModel)
                 .toList();
     }
+
+    @Override
+    public Mesa buscarMesaPorId(Long idMesa) {
+        return this.jpaMesaRepository.findById(idMesa).get().toModel();
+    }
 }

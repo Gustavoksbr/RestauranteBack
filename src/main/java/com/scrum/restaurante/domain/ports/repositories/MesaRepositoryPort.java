@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MesaRepositoryPort {
     public List<Mesa> listarMesas();
+    public Mesa buscarMesaPorId(Long idMesa);
 }

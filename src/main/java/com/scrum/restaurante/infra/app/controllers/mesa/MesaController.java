@@ -1,13 +1,11 @@
 package com.scrum.restaurante.infra.app.controllers.mesa;
 
+import com.scrum.restaurante.domain.model.Comanda;
 import com.scrum.restaurante.domain.model.Mesa;
 import com.scrum.restaurante.domain.ports.services.MesaServicePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +20,15 @@ public class MesaController {
         List<Mesa> mesas = mesaServicePort.listarMesas();
         return ResponseEntity.ok(mesas);
     }
-    @PostMapping("/idMesa/comanda")
-    public void adicionarComanda(long idMesa) {
-        mesaServicePort.adicionarComanda(idMesa);
+    @GetMapping("/{id}/comanda")
+    public ResponseEntity<List<Comanda>> listarComandasDaMesa(@PathVariable long id) {
+        List<Comanda> comandas = mesaServicePort.listarComandasDaMesa(id);
+        return ResponseEntity.ok(comandas);
     }
+
+    @PostMapping("{id}/comanda")
+    public void adicionarComanda(@PathVariable long id) {
+        mesaServicePort.adicionarComanda(id);
+    }
+
 }
