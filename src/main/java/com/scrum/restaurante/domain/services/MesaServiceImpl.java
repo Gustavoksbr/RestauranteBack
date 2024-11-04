@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MesaServicePortImpl implements MesaServicePort {
+public class MesaServiceImpl implements MesaServicePort {
     @Autowired
     private MesaRepositoryPort mesaRepositoryPort;
     @Autowired
@@ -24,12 +24,15 @@ public class MesaServicePortImpl implements MesaServicePort {
 
     @Override
     public List<Comanda> listarComandasDaMesa(Long idMesa) {
+        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //depois implemento exception
         return this.comandaRepositoryPort.listarComandasDaMesa(idMesa);
     }
 
     @Override
     public void adicionarComanda(Long idMesa) {
+        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //depois implemento exception
         this.comandaRepositoryPort.adicionarComanda(idMesa);
+
     }
 
 }
