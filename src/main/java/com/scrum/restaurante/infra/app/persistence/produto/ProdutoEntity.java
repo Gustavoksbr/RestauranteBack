@@ -5,9 +5,6 @@ import com.scrum.restaurante.domain.model.Produto;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
-
 @Data
 @Entity
 @Table(name = "produto")
