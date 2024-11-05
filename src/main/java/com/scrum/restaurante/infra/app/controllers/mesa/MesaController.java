@@ -22,7 +22,7 @@ public class MesaController {
     }
     @GetMapping("/{id}/comanda")
     public ResponseEntity<List<Comanda>> listarComandasDaMesa(@PathVariable long id) {
-        List<Comanda> comandas = mesaServicePort.listarComandasDaMesa(id);
+        List<Comanda> comandas = mesaServicePort.listarComandasNaoPagasPorMesaId(id);
         return ResponseEntity.ok(comandas);
     }
 

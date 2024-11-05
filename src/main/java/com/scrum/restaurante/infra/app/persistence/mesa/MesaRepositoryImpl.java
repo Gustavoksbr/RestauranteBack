@@ -14,6 +14,13 @@ import java.util.List;
 public class MesaRepositoryImpl implements MesaRepositoryPort {
     @Autowired
     private JpaMesaRepository jpaMesaRepository;
+
+    private MesaEntity entityBuscarPorId(Long idMesa) {
+        return this.jpaMesaRepository.findById(idMesa).orElseThrow(()->new ResourceNotFoundException("Mesa não encontrada com id"+idMesa));
+    }
+
+    // implementacoes dos metodos da interface
+
     @Override
     public List<Mesa> listarMesas() {
         List<MesaEntity> produtoEntities = this.jpaMesaRepository.findAll();
@@ -24,6 +31,6 @@ public class MesaRepositoryImpl implements MesaRepositoryPort {
 
     @Override
     public Mesa buscarMesaPorId(Long idMesa) {
-        return this.jpaMesaRepository.findById(idMesa).orElseThrow( ()->new ResourceNotFoundException("Mesa não encontrada com id"+idMesa)).toModel();
+        return this.entityBuscarPorId(idMesa).toModel();
     }
 }

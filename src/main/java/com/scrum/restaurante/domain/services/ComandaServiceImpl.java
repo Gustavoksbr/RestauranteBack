@@ -20,13 +20,11 @@ public class ComandaServiceImpl implements ComandaServicePort {
 
     @Override
     public void pagarComanda(Long idComanda) {
-        this.comandaRepositoryPort.buscarComandaPorId(idComanda); //serve pra verificar se a comanda existe
         this.comandaRepositoryPort.pagarComanda(idComanda);
     }
 
     @Override
     public void removerComanda(Long idComanda) {
-        this.comandaRepositoryPort.buscarComandaPorId(idComanda); //serve pra verificar se a comanda existe
         this.comandaRepositoryPort.removerComanda(idComanda);
     }
 

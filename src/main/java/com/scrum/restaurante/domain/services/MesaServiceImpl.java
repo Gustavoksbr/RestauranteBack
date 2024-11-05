@@ -23,7 +23,7 @@ public class MesaServiceImpl implements MesaServicePort {
     }
 
     @Override
-    public List<Comanda> listarComandasDaMesa(Long idMesa) {
+    public List<Comanda> listarComandasNaoPagasPorMesaId(Long idMesa) {
         this.mesaRepositoryPort.buscarMesaPorId(idMesa); //serve pra verificar se a mesa existe
         return this.comandaRepositoryPort.listarComandasDaMesa(idMesa);
     }
