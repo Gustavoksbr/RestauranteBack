@@ -3,6 +3,7 @@ package com.scrum.restaurante.infra.app.persistence.mesa;
 import com.scrum.restaurante.domain.model.Mesa;
 import com.scrum.restaurante.domain.ports.repositories.MesaRepositoryPort;
 import com.scrum.restaurante.infra.app.persistence.produto.ProdutoEntity;
+import com.scrum.restaurante.infra.config.exception.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,6 @@ public class MesaRepositoryImpl implements MesaRepositoryPort {
 
     @Override
     public Mesa buscarMesaPorId(Long idMesa) {
-        return this.jpaMesaRepository.findById(idMesa).get().toModel();
+        return this.jpaMesaRepository.findById(idMesa).orElseThrow( ()->new ResourceNotFoundException("Mesa não encontrada com id"+idMesa)).toModel();
     }
 }

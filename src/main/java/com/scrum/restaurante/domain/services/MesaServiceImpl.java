@@ -24,15 +24,14 @@ public class MesaServiceImpl implements MesaServicePort {
 
     @Override
     public List<Comanda> listarComandasDaMesa(Long idMesa) {
-        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //depois implemento exception
+        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //serve pra verificar se a mesa existe
         return this.comandaRepositoryPort.listarComandasDaMesa(idMesa);
     }
 
     @Override
     public void adicionarComanda(Long idMesa) {
-        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //depois implemento exception
+        this.mesaRepositoryPort.buscarMesaPorId(idMesa); //serve pra verificar se a mesa existe
         this.comandaRepositoryPort.adicionarComanda(idMesa);
-
     }
 
 }
