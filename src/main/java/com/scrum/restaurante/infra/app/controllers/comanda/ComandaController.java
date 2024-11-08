@@ -2,7 +2,9 @@ package com.scrum.restaurante.infra.app.controllers.comanda;
 
 import com.scrum.restaurante.domain.model.ItemComanda;
 import com.scrum.restaurante.domain.ports.services.ComandaServicePort;
-import com.scrum.restaurante.infra.app.controllers.itemcomanda.dtos.ItemComandaResponse;
+import com.scrum.restaurante.infra.app.controllers.comanda.dtos.ItemComandaRequest;
+import com.scrum.restaurante.infra.app.controllers.comanda.dtos.ItemComandaResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,15 @@ public class ComandaController {
     public void pagarComanda(@PathVariable long idComanda) {
         comandaServicePort.pagarComanda(idComanda);
     }
-    @GetMapping("/{id}/itemcomanda")
-    public ResponseEntity<List<ItemComandaResponse>> listarItensComanda(@PathVariable long id) {
-        List<ItemComanda> lista = comandaServicePort.listarItensDaComanda(id);
+    @GetMapping("/{idComanda}/itemcomanda")
+    public ResponseEntity<List<ItemComandaResponse>> listarItensComanda(@PathVariable long idComanda) {
+        List<ItemComanda> lista = comandaServicePort.listarItensDaComanda(idComanda);
         List<ItemComandaResponse> listaResponse = lista.stream().map(ItemComandaResponse::new).toList();
         return ResponseEntity.ok(listaResponse);
+    }
+    @PostMapping("/{idComanda}/itemcomanda")
+    public void adicionarItemComanda(@PathVariable long idComanda, @RequestBody @Valid ItemComandaRequest itemComandaRequest) {
+        ItemComanda itemComanda = itemComandaRequest.toModel();
+        comandaServicePort.adicionarItemComanda(idComanda, itemComanda);
     }
 }

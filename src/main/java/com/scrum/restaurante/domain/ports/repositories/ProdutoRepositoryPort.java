@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProdutoRepositoryPort {
     public List<Produto> listarProdutos();
+    public Produto buscarProdutoPorNome(String nome);
 }

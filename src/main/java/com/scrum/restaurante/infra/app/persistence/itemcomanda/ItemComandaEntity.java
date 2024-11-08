@@ -2,17 +2,20 @@ package com.scrum.restaurante.infra.app.persistence.itemcomanda;
 
 import com.scrum.restaurante.domain.model.ItemComanda;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "itemcomanda")
+@IdClass(ItemComandaId.class)
 public class ItemComandaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "id_comanda", nullable = false)
+    @Column(name = "id_comanda")
     private long idComanda;
-    @Column(name = "id_produto", nullable = false)
+    @Id
+    @Column(name = "id_produto")
     private long idProduto;
     @Column(name = "nome_produto", nullable = false)
     private String nomeProduto;
@@ -20,8 +23,14 @@ public class ItemComandaEntity {
     @Column(name = "preco_unitario")
     private float precoUnitario;
     @Column(name = "subtotal")
-    private float precoTotal;
+    private BigDecimal subTotal = null;
+    public ItemComandaEntity(ItemComanda itemComanda) {
+        this.idComanda = itemComanda.getIdComanda();
+        this.idProduto = itemComanda.getIdProduto();
+        this.quantidade = itemComanda.getQuantidade();
+    }
+
     public ItemComanda toModel(){
-        return new ItemComanda(id, idComanda, idProduto, nomeProduto, quantidade, precoUnitario, precoTotal);
+        return new ItemComanda(idComanda, idProduto, nomeProduto, quantidade, precoUnitario, subTotal);
     }
 }
