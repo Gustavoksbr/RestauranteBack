@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemComandaServiceImpl implements ItemComandaServicePort {
     @Override
-    public void removerItemComanda() {
+    public void removerItemComanda(long id) {
 
     }
 }
