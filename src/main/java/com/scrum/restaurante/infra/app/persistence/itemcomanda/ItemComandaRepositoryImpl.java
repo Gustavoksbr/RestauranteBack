@@ -34,7 +34,8 @@ public class ItemComandaRepositoryImpl implements ItemComandaRepositoryPort { //
     }
 
     @Override
-    public void removerItemComanda(Long idItemComanda) {
-
+    public void removerItemComanda(long idComanda, long idProduto) {
+        ItemComandaId idItemComanda = new ItemComandaId(idComanda, idProduto);
+        this.jpaItemComandaRepository.deleteById(idItemComanda);
     }
 }
