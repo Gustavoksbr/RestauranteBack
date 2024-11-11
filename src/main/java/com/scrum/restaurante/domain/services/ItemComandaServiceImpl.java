@@ -10,8 +10,8 @@ public class ItemComandaServiceImpl implements ItemComandaServicePort {
     @Autowired
     private ItemComandaRepositoryPort itemComandaRepositoryPort;
     @Override
-    public void removerItemComanda(long idComanda, long idProduto) {
+    public void removerItemComanda(long idComanda, String nomeProduto) {
 
-        this.itemComandaRepositoryPort.removerItemComanda(idComanda,idProduto);
+        this.itemComandaRepositoryPort.removerItemComanda(idComanda,nomeProduto);
     }
 }

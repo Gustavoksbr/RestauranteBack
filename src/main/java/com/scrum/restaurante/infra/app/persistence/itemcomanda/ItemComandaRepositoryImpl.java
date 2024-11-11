@@ -3,6 +3,7 @@ package com.scrum.restaurante.infra.app.persistence.itemcomanda;
 import com.scrum.restaurante.domain.model.ItemComanda;
 import com.scrum.restaurante.domain.ports.repositories.ItemComandaRepositoryPort;
 import com.scrum.restaurante.infra.config.exception.exceptions.JaExisteException;
+import com.scrum.restaurante.infra.config.exception.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +17,17 @@ public class ItemComandaRepositoryImpl implements ItemComandaRepositoryPort { //
     private List<ItemComandaEntity> entityListarItensDaComanda(Long idComanda) {
         return jpaItemComandaRepository.findAllByIdComanda(idComanda);
     }
-    public boolean existsById(ItemComandaId idItemComanda) {
+    private boolean existsById(ItemComandaId idItemComanda) {
         return jpaItemComandaRepository.existsById(idItemComanda);
     }
+
+    private ItemComandaEntity findByIdAndNomeProduto(Long idComanda, String nomeProduto) {
+        Optional<ItemComandaEntity> itemComandaEntity = jpaItemComandaRepository.findByIdComandaAndNomeProduto(idComanda, nomeProduto);
+        return itemComandaEntity.orElseThrow(() -> new ResourceNotFoundException("Item de comanda não encontrado"));
+    }
+
+
+
     //implementacoes dos metodos da interface ItemComandaRepositoryPort
     @Override
     public List<ItemComanda> listarItensDaComanda(Long idComanda) {
@@ -34,8 +43,8 @@ public class ItemComandaRepositoryImpl implements ItemComandaRepositoryPort { //
     }
 
     @Override
-    public void removerItemComanda(long idComanda, long idProduto) {
-        ItemComandaId idItemComanda = new ItemComandaId(idComanda, idProduto);
-        this.jpaItemComandaRepository.deleteById(idItemComanda);
+    public void removerItemComanda(long idComanda, String nomeProduto) {
+        ItemComandaEntity itemComandaEntity = this.findByIdAndNomeProduto(idComanda, nomeProduto);
+        this.jpaItemComandaRepository.delete(itemComandaEntity);
     }
 }

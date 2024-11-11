@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface JpaItemComandaRepository extends JpaRepository<ItemComandaEntity, ItemComandaId> {
-    public List<ItemComandaEntity> findAllByIdComanda(Long idComanda);
-    public void deleteById(ItemComandaId idItemComanda);
+
+    List<ItemComandaEntity> findAllByIdComanda(Long idComanda);
+    Optional<ItemComandaEntity> findByIdComandaAndNomeProduto(Long idComanda, String nomeProduto);
 }

@@ -18,7 +18,6 @@ public class MesaRepositoryImpl implements MesaRepositoryPort {
     private MesaEntity entityBuscarPorId(Long idMesa) {
         return this.jpaMesaRepository.findById(idMesa).orElseThrow(()->new ResourceNotFoundException("Mesa não encontrada com id"+idMesa));
     }
-
     // implementacoes dos metodos da interface
 
     @Override
