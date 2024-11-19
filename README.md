@@ -3,30 +3,24 @@
 
 
 
-## Descrição 
+## Descrição
 
-Este é o back end de um projeto para a gestão de restaurante
+Este é o back end de um projeto para gestão de restaurantes
 
-É uma Api Rest com o principal objetivo de gerenciar as comandas e seu itens relacionados, utilizando métodos http e salvando em um banco de dados
+É uma Api Rest com o principal objetivo de gerenciar as comandas e seu itens relacionados, utilizando métodos http e consultando num banco de dados
 
 Visualize o front end [aqui](https://github.com/Gustavoksbr/RestauranteFront)
 
-
-
+O projeto completo (back, front e ux design) foi desenvolvido por uma equipe no Azure DevOps, utilizando a metodologia ágil Scrum
 
 ## Instalando o projeto
 
 ### Dependências
-As tecnologias utilizadas foram:
-- Java 17
-- Spring Boot
-- Gradle
-- MySQL
+Instale:
+-Java 17
+-Mysql
 
-Instale-as caso não as tenha
-
-
-### Passo a passo para rodar na sua máquina
+### Passo a passo para rodar a API
 
 1. Clone o repositório para a sua máquina local:
     ```bash
@@ -56,45 +50,18 @@ Instale-as caso não as tenha
     ```
 obs: vc pode alterar o nome do banco de dados e as portas do spring de acordo com a sua preferência em src/main/resources/aplication.properties
 
-## Banco de Dados
+## Modelagem
 
-```sql
-CREATE TABLE mesa (
-    id int(11) NOT NULL,
-    quantidade_comanda int(11) DEFAULT 0
-);
+![Modelagem do Banco de Dados](docs/modelagem.png)
 
-CREATE TABLE produto (
-    id int(11) NOT NULL,
-    nome varchar(255) NOT NULL,
-    preco decimal(10,2) NOT NULL,
-    categoria enum('Bebida','Prato','Sobremesa') NOT NULL
-);
-
-CREATE TABLE comanda ( 
-    id int(11) NOT NULL,
-    id_mesa int(11) NOT NULL,
-    pago tinyint(1) DEFAULT 0,
-    total decimal(10,2) DEFAULT 0.00
-);
-
-CREATE TABLE itemcomanda (
-    id_comanda int(11) NOT NULL,
-    id_produto int(11) NOT NULL,
-    nome_produto varchar(255) NOT NULL,
-    quantidade int(11) NOT NULL,
-    preco_unitario decimal(10,2) DEFAULT 0.00,
-    subtotal decimal(10,2) GENERATED ALWAYS AS (quantidade * preco_unitario) STORED
-);
-```
 
 ## Casos de Uso
 
 ### 1. Listagem de Mesas
 
-- **Ação:** Usuário entra na tela 1
-- **Requisição:** GET /mesa
-- **Json Response:**
+- GET /mesa
+- Sem json request
+- **Exemplo de Json Response:**
     ```json
     [
         {"id": 1, "quantidadeComandas": 3},
@@ -103,12 +70,24 @@ CREATE TABLE itemcomanda (
         {"id": 4, "quantidadeComandas": 2}
     ]
     ```
+### 2. Listagem de Produtos
 
-### 2. Listagem de Comandas
 
-- **Ação:** Na tela 1, usuário clica em uma mesa, entrando na tela 2
-- **Requisição:** GET mesa/{id}/comanda
-- **Json Response:**
+- GET /produto
+- Sem json request
+- **Exemplo de Json Response:**
+    ```json
+    [
+        {"nome": "bombom", "categoria": "sobremesa", "precoUnitario": 3},
+        {"nome": "lasanha", "categoria": "prato", "precoUnitario": 20}
+    ]
+    ```
+  
+### 3. Listagem de Comandas
+
+- GET mesa/{id}/comanda
+- Sem json request
+- **Exemplo de Json Response:**
     ```json
     [
         {"id": 2, "total": 5.50},
@@ -117,11 +96,12 @@ CREATE TABLE itemcomanda (
     ]
     ```
 
-### 3. Listagem de Itens da Comanda
+### 4. Listagem de Itens da Comanda
 
-- **Ação:** Na tela 2, usuário seleciona uma comanda
-- **Requisição:** GET comanda/{id}/itemcomanda
-- **Json Response:**
+
+- GET comanda/{id}/itemcomanda
+- Sem json request
+- **Exemplo de Json Response:**
     ```json
     [
         {"nomeProduto": "bombom", "precoUnitario": 3, "quantidade": 4, "precoTotal": 12},
@@ -129,87 +109,50 @@ CREATE TABLE itemcomanda (
     ]
     ```
 
-### 4. Listagem de Produtos
 
-- **Ação:** Na tela 2, o usuário clica em 'adicionar item', entrando na tela 3
-- **Requisição:** GET /produto
-- **Json Response:**
-    ```json
-    [
-        {"nome": "bombom", "categoria": "sobremesa", "precoUnitario": 3},
-        {"nome": "lasanha", "categoria": "prato", "precoTotal": 20}
-    ]
-    ```
+### 5. Criar Comanda
 
-### 5. Criar Item na Comanda
+-  `POST /mesa/{id}/comanda`
 
-- **Ação:** Na tela 3, o usuário seleciona o produto que quer adicionar na comanda e escolhe a quantidade
-- **Requisição:** POST /comanda/{id}/itemcomanda
-- **Json Request:**
+### 6. Criar Item na Comanda
+
+- `POST /comanda/{id}/itemcomanda`
+- **Exemplo de Json Request:**
     ```json
     [
         {"nomeProduto": "bombom", "quantidade": 4},
         {"nomeProduto": "lasanha", "quantidade": 1}
     ]
     ```
+- Sem json response
 
-### 6. Apagar Item da Comanda
+### 7. Apagar Item da Comanda
 
-- **Ação:** Na tela 2, o usuário seleciona o produto que quer remover da comanda
-- **Requisição:** DELETE /itemcomanda/idcomanda/nomeproduto
+- `DELETE /itemcomanda/{idcomanda}/{nomeproduto}`
 
-### 7. Apagar Comanda da Mesa
+### 8. Apagar Comanda da Mesa
 
-- **Ação:** Na tela 2, o usuário escolhe uma comanda para deletar
-- **Requisição:** DELETE /comanda/id
+- `DELETE /comanda/{id}`
 
-### 8. Pagar Comanda
+### 9. Pagar Comanda
 
-- **Ação:** Na tela 2, o usuário escolhe uma comanda para ser paga
-- **Requisição:** PATCH /comanda/id
+- `PATCH /comanda/{id}`
 
-### 9. Criar Comanda
+## Detalhes Técnicos
 
-- **Ação:** Na tela 2, usuário clica em "adicionar comanda"
-- **Requisição:** POST /mesa/{id}/comanda
+### Arquitetura
 
+- Utilizada arquitetura hexagonal
+- Dividido entre a camada de domínio (models, casos de uso e portas) e a camada da aplicação (controllers e persistencia)
+- Os métodos dos services refletem os métodos dos controllers. Já os métodos dos repositories refletem a sua respectiva entidade
+- Justificativa: prepara o projeto para possíveis mudanças de tecnologias e adicões de funcionalidades. Por exemplo, possível autenticação de usuários e serviço de envio de emails no futuro
 
+### Ordem dos processos de cada caso de uso
+- Controller -> ServicePort -> ServiceImpl -> RepositoryPort -> RepositoryImpl -> JpaRepository
 
+### Dependências específicas
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Jpa para persistência
+- Flyway para migrations
+- Lombok para redução de boilerplate
+- Spring Validation para validação de body requests
