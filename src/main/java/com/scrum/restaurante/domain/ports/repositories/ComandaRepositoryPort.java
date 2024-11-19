@@ -10,4 +10,5 @@ public interface ComandaRepositoryPort {
     public void adicionarComanda(Long idMesa);
     public void pagarComanda(Long idComanda);
     public void removerComanda(Long idComanda);
+    public List<Comanda> listarComandasPagas();
 }

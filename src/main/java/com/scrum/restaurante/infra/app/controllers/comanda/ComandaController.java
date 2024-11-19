@@ -1,5 +1,6 @@
 package com.scrum.restaurante.infra.app.controllers.comanda;
 
+import com.scrum.restaurante.domain.model.Comanda;
 import com.scrum.restaurante.domain.model.ItemComanda;
 import com.scrum.restaurante.domain.ports.services.ComandaServicePort;
 import com.scrum.restaurante.infra.app.controllers.comanda.dtos.ItemComandaRequest;
@@ -36,5 +37,11 @@ public class ComandaController {
     public void adicionarItemComanda(@PathVariable long idComanda, @RequestBody @Valid ItemComandaRequest itemComandaRequest) {
         ItemComanda itemComanda = itemComandaRequest.toModel();
         comandaServicePort.adicionarItemComanda(idComanda, itemComanda);
+    }
+    @GetMapping("/pagas")
+    public ResponseEntity<List<Comanda>> listarComandasPagas() {
+        List<Comanda> lista = comandaServicePort.listarComandasPagas();
+        List<ItemComandaResponse> listaResponse = lista.stream().map(ComandaResponse::new).toList();
+        return ResponseEntity.ok(listaResponse);
     }
 }

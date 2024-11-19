@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface JpaComandaRepository extends JpaRepository<ComandaEntity, Long> {
     List<ComandaEntity> findByMesaIdAndPagaFalse(Long mesaId);
+    List<ComandaEntity> findAllByPagaTrue();
 }

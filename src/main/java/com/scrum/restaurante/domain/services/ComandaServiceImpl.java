@@ -47,4 +47,10 @@ public class ComandaServiceImpl implements ComandaServicePort {
         itemComanda.setIdProduto(produto.getId());
         this.itemComandaRepositoryPort.adicionarItemComanda(itemComanda);
     }
+
+    @Override
+    public List<Comanda> listarComandasPagas() {
+        return this.comandaRepositoryPort.listarComandasPagas();
+    }
+
 }

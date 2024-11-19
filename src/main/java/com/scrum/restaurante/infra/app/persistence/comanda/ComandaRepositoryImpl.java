@@ -11,17 +11,17 @@ import java.util.List;
 @Repository
 public class ComandaRepositoryImpl implements ComandaRepositoryPort {
     @Autowired
-    private JpaComandaRepository JpacomandaRepository;
+    private JpaComandaRepository jpaComandaRepository;
 
     private ComandaEntity entityBuscarPorId(Long idComanda) {
-        return this.JpacomandaRepository.findById(idComanda).orElseThrow(()->new ResourceNotFoundException("Comanda não encontrada com id"+idComanda));
+        return this.jpaComandaRepository.findById(idComanda).orElseThrow(()->new ResourceNotFoundException("Comanda não encontrada com id"+idComanda));
     }
 
     //implementacao dos metodos da interface
 
     @Override
     public List<Comanda> listarComandasDaMesa(Long idMesa) {
-       return this.JpacomandaRepository.findByMesaIdAndPagaFalse(idMesa).
+       return this.jpaComandaRepository.findByMesaIdAndPagaFalse(idMesa).
                stream().
                map(ComandaEntity::toModel).
                toList();
@@ -36,19 +36,27 @@ public class ComandaRepositoryImpl implements ComandaRepositoryPort {
     public void adicionarComanda(Long idMesa) {
         ComandaEntity comandaEntity = new ComandaEntity();
         comandaEntity.setMesaId(idMesa);
-        this.JpacomandaRepository.save(comandaEntity);
+        this.jpaComandaRepository.save(comandaEntity);
     }
 
     @Override
     public void pagarComanda(Long idComanda) {
         ComandaEntity comandaEntity = entityBuscarPorId(idComanda); //serve para verificar se a comanda existe
         comandaEntity.setPaga(true); //seta a comanda como paga
-        this.JpacomandaRepository.save(comandaEntity);
+        this.jpaComandaRepository.save(comandaEntity);
     }
 
     @Override
     public void removerComanda(Long idComanda) {
         entityBuscarPorId(idComanda); //serve para verificar se a comanda existe
-        this.JpacomandaRepository.deleteById(idComanda);
+        this.jpaComandaRepository.deleteById(idComanda);
+    }
+
+    @Override
+    public List<Comanda> listarComandasPagas() {
+        return this.jpaComandaRepository.findAllByPagaTrue().
+                stream().
+                map(ComandaEntity::toModel).
+                toList();
     }
 }
