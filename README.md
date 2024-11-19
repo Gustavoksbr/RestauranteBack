@@ -16,14 +16,9 @@ O projeto completo (back, front e ux design) foi desenvolvido por uma equipe no 
 ## Instalando o projeto
 
 ### Dependências
-As tecnologias utilizadas foram:
-- Java 17
-- Spring Boot
-- Gradle
-- MySQL
-
-Instale-as caso não as tenha
-
+Instale:
+-Java 17
+-Mysql
 
 ### Passo a passo para rodar a API
 
