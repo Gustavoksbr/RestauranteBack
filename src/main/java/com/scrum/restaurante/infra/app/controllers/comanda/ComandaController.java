@@ -38,10 +38,10 @@ public class ComandaController {
         ItemComanda itemComanda = itemComandaRequest.toModel();
         comandaServicePort.adicionarItemComanda(idComanda, itemComanda);
     }
-    @GetMapping("/pagas")
-    public ResponseEntity<List<Comanda>> listarComandasPagas() {
-        List<Comanda> lista = comandaServicePort.listarComandasPagas();
-        List<ItemComandaResponse> listaResponse = lista.stream().map(ComandaResponse::new).toList();
-        return ResponseEntity.ok(listaResponse);
-    }
+//    @GetMapping("/pagas")
+//    public ResponseEntity<List<Comanda>> listarComandasPagas() {
+//        List<Comanda> lista = comandaServicePort.listarComandasPagas();
+//        List<ItemComandaResponse> listaResponse = lista.stream().map(ItemComandaResponse::new).toList();
+//        return ResponseEntity.ok(listaResponse);
+//    }
 }
