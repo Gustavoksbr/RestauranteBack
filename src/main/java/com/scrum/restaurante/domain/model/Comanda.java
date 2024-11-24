@@ -3,9 +3,11 @@ package com.scrum.restaurante.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @Data
-public class Comanda {
+public class Comanda    {
     private long id;
     private long idMesa;
     private boolean paga;

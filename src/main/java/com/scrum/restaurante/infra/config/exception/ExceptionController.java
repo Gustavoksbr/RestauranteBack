@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.net.ConnectException;
+
 @RestControllerAdvice
 public class ExceptionController {
 
@@ -18,6 +20,10 @@ public class ExceptionController {
     public ResponseEntity<String> handleJaExiste(JaExisteException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
-
+    @ExceptionHandler(org.springframework.data.redis.RedisConnectionFailureException.class)
+    public ResponseEntity<String> handleRedisConnectionException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erro ao conectar ao Redis: ");
+    }
 
 }

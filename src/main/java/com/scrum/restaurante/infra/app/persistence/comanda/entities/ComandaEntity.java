@@ -1,9 +1,8 @@
-package com.scrum.restaurante.infra.app.persistence.comanda;
+package com.scrum.restaurante.infra.app.persistence.comanda.entities;
 
 import com.scrum.restaurante.domain.model.Comanda;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -13,13 +12,13 @@ public class ComandaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
      @Column(name = "id_mesa", nullable = false)
-     private Long mesaId;
+     private Long idMesa;
      @Column(name = "pago")
     private boolean paga;
     @Column(name = "total")
-    private float valorTotal;
+    private float precoTotal;
 
     public Comanda toModel() {
-        return new Comanda(this.id, this.mesaId, this.paga, this.valorTotal);
+        return new Comanda(this.id, this.idMesa, this.paga, this.precoTotal);
     }
 }
