@@ -14,7 +14,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepositoryPort {
     private JpaProdutoRepository jpaProdutoRepository;
 
     private ProdutoEntity entityBuscarProdutoPorNome(String nome) {
-        return jpaProdutoRepository.findByNome(nome).orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado com nome "+nome));
+        return jpaProdutoRepository.findByNome(nome).orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado com username "+nome));
     }
 
     @Override

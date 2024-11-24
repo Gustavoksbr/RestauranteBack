@@ -14,4 +14,11 @@ public class Usuario {
     private String email;
     private Boolean ativo;
     private Boolean doisFatores;
+
+    public Usuario(String username, String email, String senha) {
+        this.username = username;
+        this.email = email;
+        this.password = senha;
+
+    }
 }
