@@ -2,6 +2,7 @@ package com.scrum.restaurante.infra.config.exception;
 
 import com.scrum.restaurante.infra.config.exception.exceptions.JaExisteException;
 import com.scrum.restaurante.infra.config.exception.exceptions.ResourceNotFoundException;
+import com.scrum.restaurante.infra.config.exception.exceptions.SenhaIncorretaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -23,6 +24,12 @@ public class ExceptionController {
     public ResponseEntity<String> handleJaExiste(JaExisteException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+    @ExceptionHandler(SenhaIncorretaException.class)
+    public ResponseEntity<String> handleSenhaIncorreta(SenhaIncorretaException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();

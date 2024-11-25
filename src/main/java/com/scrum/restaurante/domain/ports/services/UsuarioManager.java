@@ -12,6 +12,8 @@ public interface UsuarioManager {
 
     String createUser(Usuario usuario);
 
+    Response authenticate(Usuario usuario);
+
 //    Response authenticate(Usuario usuario);
 //
 //    String authenticate2fa(Usuario usuario, String codigo);

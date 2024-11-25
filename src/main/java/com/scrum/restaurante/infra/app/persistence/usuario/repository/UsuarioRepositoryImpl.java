@@ -5,6 +5,7 @@ import com.scrum.restaurante.domain.model.Usuario;
 import com.scrum.restaurante.domain.ports.repositories.UsuarioRepository;
 import com.scrum.restaurante.infra.app.persistence.usuario.entity.UserEntity;
 import com.scrum.restaurante.infra.config.exception.exceptions.JaExisteException;
+import com.scrum.restaurante.infra.config.exception.exceptions.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,8 +15,15 @@ import java.util.List;
 @Repository
 @Transactional
 public class UsuarioRepositoryImpl implements UsuarioRepository {
+
     @Autowired
     private JpaUsuarioRepository jpaUsuarioRepository;
+
+    //metodos privados
+    private UserEntity entityFindByUsername(String username) {
+        return this.jpaUsuarioRepository.findByUsernameAndAtivoTrue(username).orElseThrow(() -> new ResourceNotFoundException("Usuario "+username+" não encontrado"));
+    }
+
 
     @Override
     public Boolean existePorUsername(String username) {
@@ -25,6 +33,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     public Boolean existePorEmail(String email) {
         return this.jpaUsuarioRepository.existsByEmail(email);
     }
+
+    @Override
+    public Usuario encontrarPorUsername(String username) {
+        return this.entityFindByUsername(username).toUsuario();
+    }
+
+
 //    @Override
 //    public List<Usuario> listar() {
 //        return this.jpaUsuarioRepository.findAllByAtivoTrue().stream().map(UserEntity::toUsuario).toList();

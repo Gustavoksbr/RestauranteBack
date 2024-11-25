@@ -2,6 +2,7 @@ package com.scrum.restaurante.infra.app.controllers.usuario;
 
 
 import com.scrum.restaurante.domain.model.Jwt;
+import com.scrum.restaurante.domain.model.Response;
 import com.scrum.restaurante.domain.model.Usuario;
 import com.scrum.restaurante.domain.ports.services.UsuarioManager;
 import com.scrum.restaurante.infra.app.controllers.usuario.dtos.UsuarioRequest;
@@ -21,5 +22,11 @@ public class UsuarioController {
       Jwt jwt = new Jwt(usuarioServiceManager.createUser(usuario.toDomain()));
       return ResponseEntity.ok(jwt);
    }
+   @PostMapping("/login")
+   public ResponseEntity<Response> authenticate(@RequestBody Usuario usuario){
+      Response response = usuarioServiceManager.authenticate(usuario);
+      return ResponseEntity.ok(response);
    }
+
+}
 
