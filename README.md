@@ -124,7 +124,7 @@ obs: vc pode alterar o nome do banco de dados e as portas do spring de acordo co
         {"nomeProduto": "lasanha", "quantidade": 1}
     ]
     ```
-- Sem json response
+- Sem json authResponse
 
 ### 7. Apagar Item da Comanda
 

@@ -1,7 +1,6 @@
 package com.scrum.restaurante.domain.ports.repositories;
 
-import com.scrum.restaurante.domain.model.Usuario;
-import com.scrum.restaurante.infra.app.persistence.usuario.entity.UserEntity;
+import com.scrum.restaurante.domain.model.usuario.Usuario;
 
 public interface UsuarioRepository {
     Usuario criar(Usuario usuario);
@@ -10,4 +9,5 @@ public interface UsuarioRepository {
     Boolean existePorEmail(String email);
     Usuario editarNome(Usuario usuario);
     Usuario encontrarPorUsername(String username);
+    void alterarDoisFatores(Usuario usuario);
 }
