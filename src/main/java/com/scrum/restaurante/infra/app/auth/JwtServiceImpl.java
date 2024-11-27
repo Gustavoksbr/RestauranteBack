@@ -1,4 +1,4 @@
-package com.scrum.restaurante.infra.app.controllers.usuario.auth;
+package com.scrum.restaurante.infra.app.auth;
 
 import com.scrum.restaurante.domain.ports.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;

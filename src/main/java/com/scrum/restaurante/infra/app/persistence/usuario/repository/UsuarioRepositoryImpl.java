@@ -35,6 +35,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
+    public Usuario editarNome(Usuario usuario) {
+        UserEntity userEntity = this.entityFindByUsername(usuario.getUsername());
+        userEntity.setNome(usuario.getNome());
+        return this.jpaUsuarioRepository.save(userEntity).toUsuario();
+    }
+
+    @Override
     public Usuario encontrarPorUsername(String username) {
         return this.entityFindByUsername(username).toUsuario();
     }

@@ -51,4 +51,13 @@ public class UsuarioManagerImpl implements UsuarioManager {
         return new Jwt(jwtService.generateToken(usuario.getUsername())); //retorna o token
 
     }
+
+    @Override
+   public String mudarNome(String nome, String token) {
+        String username = jwtService.getUsername(token);
+        Usuario usuario = userRepository.encontrarPorUsername(username);
+        usuario.setNome(nome);
+        userRepository.editarNome(usuario);
+        return usuario.getNome();
+    }
 }

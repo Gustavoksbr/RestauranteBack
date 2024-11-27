@@ -14,6 +14,8 @@ public interface UsuarioManager {
 
     Response authenticate(Usuario usuario);
 
+    String mudarNome(String nome, String token);
+
 //    Response authenticate(Usuario usuario);
 //
 //    String authenticate2fa(Usuario usuario, String codigo);

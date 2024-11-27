@@ -8,6 +8,6 @@ public interface UsuarioRepository {
     void validarNovoUsuario(Usuario usuario);
     Boolean existePorUsername(String username);
     Boolean existePorEmail(String email);
-
+    Usuario editarNome(Usuario usuario);
     Usuario encontrarPorUsername(String username);
 }

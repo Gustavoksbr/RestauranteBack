@@ -1,4 +1,4 @@
-package com.scrum.restaurante.infra.app.controllers.usuario.dtos;
+package com.scrum.restaurante.infra.app.controllers.usuario.dtos.request;
 
 import com.scrum.restaurante.domain.model.Usuario;
 import jakarta.validation.constraints.Email;
