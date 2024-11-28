@@ -3,8 +3,10 @@ package com.scrum.restaurante.infra.controllers.usuario;
 
 import com.scrum.restaurante.domain.model.Jwt;
 import com.scrum.restaurante.domain.model.usuario.AuthResponse;
+import com.scrum.restaurante.domain.model.usuario.JwtResponse;
 import com.scrum.restaurante.domain.model.usuario.Usuario;
 import com.scrum.restaurante.domain.ports.manager.UsuarioManager;
+import com.scrum.restaurante.infra.controllers.usuario.dtos.request.DoisFatoresRequest;
 import com.scrum.restaurante.infra.controllers.usuario.dtos.request.NomeRequest;
 import com.scrum.restaurante.infra.controllers.usuario.dtos.request.UsuarioRequest;
 import jakarta.validation.Valid;
@@ -37,6 +39,12 @@ public class UsuarioController {
    public ResponseEntity<Boolean> doisFatores(@RequestHeader("Authorization") String token) {
       return ResponseEntity.ok(usuarioServiceManager.habilitarDesabilitarDoisFatores(token));
    }
+   @PostMapping("/login2fa")
+   public ResponseEntity<JwtResponse> authenticate2fa(@RequestBody @Valid DoisFatoresRequest doisFatoresRequest){
+      Usuario usuario = new Usuario(doisFatoresRequest.getUsername(), doisFatoresRequest.getPassword());
+      JwtResponse jwtResponse = new JwtResponse(usuarioServiceManager.authenticate2fa(usuario, doisFatoresRequest.getCodigo()));
+      return ResponseEntity.ok(jwtResponse);
 
+   }
 }
 

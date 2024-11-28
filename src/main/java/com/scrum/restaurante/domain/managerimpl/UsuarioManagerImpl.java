@@ -1,5 +1,7 @@
 package com.scrum.restaurante.domain.managerimpl;
 
+import com.scrum.restaurante.config.exception.exceptions.ErroDeRequisicaoGeral;
+import com.scrum.restaurante.config.exception.exceptions.ResourceNotFoundException;
 import com.scrum.restaurante.domain.model.Jwt;
 import com.scrum.restaurante.domain.model.usuario.AuthResponse;
 import com.scrum.restaurante.domain.model.usuario.Usuario;
@@ -91,5 +93,21 @@ public class UsuarioManagerImpl implements UsuarioManager {
         usuario.setDoisFatores(!usuario.getDoisFatores());
         this.userRepository.alterarDoisFatores(usuario);
         return usuario.getDoisFatores();
+    }
+
+    @Override
+    public String authenticate2fa(Usuario usuario, String codigo) {
+        this.matches(usuario);
+        String verificationCode = this.verificationCodes.get(usuario.getUsername());
+        if(verificationCode == null) {
+            throw new ResourceNotFoundException("Código de autenticação não encontrado");
+        }
+        if (verificationCode.equals(codigo)) {
+            this.verificationCodes.remove(usuario.getUsername());
+            return jwtService.generateToken(usuario.getUsername());
+        }
+        else {
+            throw new ErroDeRequisicaoGeral("Código de autenticação inválido");
+        }
     }
 }

@@ -16,6 +16,8 @@ public interface UsuarioManager {
 
     Boolean habilitarDesabilitarDoisFatores(String token);
 
+    String authenticate2fa(Usuario usuario, String codigo);
+
 //    AuthResponse authenticate(Usuario usuario);
 //
 //    String authenticate2fa(Usuario usuario, String codigo);
