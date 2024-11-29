@@ -12,7 +12,7 @@ public class ProdutoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username",unique = true, nullable = false)
+    @Column(name = "nome",unique = true, nullable = false)
     private String nome;
     @Column(name = "preco", nullable = false)
     private float preco;
