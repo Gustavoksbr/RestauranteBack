@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -38,10 +39,10 @@ public class SecurityConfig {
                         auth->auth.requestMatchers("/login").anonymous() //colocar .anonymous() para permitir apenas acesso anonimo
                                 .requestMatchers("/cadastro").anonymous()
                                 .requestMatchers("/login2fa").permitAll()
-                                .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .oauth2ResourceServer(
-                        conf -> conf.jwt(Customizer.withDefaults()));
+                                .anyRequest().permitAll());
+            //    .httpBasic(Customizer.withDefaults())
+            //    .oauth2ResourceServer(
+                   //     conf -> conf.jwt(Customizer.withDefaults()));
         return http.build();
     }
 
@@ -50,6 +51,7 @@ public class SecurityConfig {
         return NimbusJwtDecoder.withPublicKey(key).build();
     }
 
+    
     @Bean
     public JwtEncoder jwtEncoder() {
         JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
