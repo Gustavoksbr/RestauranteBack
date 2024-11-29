@@ -39,3 +39,5 @@ out/
 ## informacoes sigilosas
 
 *.env
+*.pub
+*.key
