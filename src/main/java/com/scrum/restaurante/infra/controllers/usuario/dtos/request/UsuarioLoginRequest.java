@@ -10,15 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioRequest {
+public class UsuarioLoginRequest {
     @NotBlank
     private String username;
-    @Email(message = "Email inválido")
-    private String email;
     @NotBlank
     private String password;
 
     public Usuario toDomain() {
-        return new Usuario(username, email, password);
+        return new Usuario(username, password);
     }
+
 }
