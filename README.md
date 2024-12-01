@@ -34,40 +34,44 @@ Tenha uma conta no [mailtrap](https://mailtrap.io/) para envio de emails (opcion
     ```
 3. Execute este comando para criar os arquivos com dados sensíveis:
     ```bash
-   setup_env
+   .\copy_examples.sh
     ```
-4. Abra o arquivo `src/main/resources/aplication.properties` e preencha com os seus dados. Deixei por padrão assim:
-![mysql-aplication.properties](docs/mysql-auth.png)
+4. Abra o arquivo `src/main/resources/.env`e preencha com os seus dados. Deixei por padrão assim:
 
--Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/), abra `src/main/resources/.env` e preencha com os dados do seu inbox
+   ![env](docs/env.png)
 
-   ![Modelagem do Banco de Dados](docs/env.png)
+-Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/), e preencha este arquivo com os dados do seu inbox
 
-5. Crie um banco de dados no Mysql com o nome que você definiu no arquivo `src/main/resources/aplication.properties` e deixe o MySQL rodando
+5. Execute este comando para carregar as variáveis de ambiente definidas no .env
+    ```bash
+   .\env_setup.sh
+    ```
 
-6. Execute o comando para construir o projeto com Gradle:
+6. Crie um banco de dados no Mysql com o nome que você definiu no arquivo `src/main/resources/aplication.properties` e deixe o MySQL rodando
+
+7. Execute o comando para construir o projeto com Gradle:
     ```bash
     gradlew build
     ```
 
-7. Execute a aplicação:
+8. Execute a aplicação:
     ```bash
     gradlew bootRun
     ```
 
-8. Acesse a API através do endereço `http://localhost:8080` com suas respectivas rotas num cliente http (como o Postman) e faça as requisicões em [casos de uso](#casos-de-uso)
+9. Acesse a API através do endereço `http://localhost:8080` com suas respectivas rotas num cliente http (como o Postman) e faça as requisicões em [casos de uso](#casos-de-uso)
 
 
 
-* obs: você pode escolher usar autenticacao de usuario ou nao, basta setar a variavel spring.profiles.active no arquivo `src/main/resources/application.properties`:
+* obs: você pode escolher usar autenticação de usuário ou não, basta setar a variável spring.profiles.active no arquivo `src/main/resources/application.properties`:
 
 Autenticacao ativada:
 ![Autenticacao ativada](docs/auth.png)
 
 Autenticacao desativada:
-![Autenticacao ativada](docs/no-auth.png)
+![Autenticacao desativada](docs/no-auth.png)
 
-Lembrando que, com a autenticacao ativada, voce deve passar o token de autenticacao no header de todas as requisicoes dos [casos de uso](#casos-de-uso)
+Lembrando que, com a autenticação ativada, voce deve passar o token de autenticação no header de todas as requisicões dos [casos de uso](#casos-de-uso)
 
 Para adquirir um token, você precisa de [autenticacao](#autenticacao)
 
