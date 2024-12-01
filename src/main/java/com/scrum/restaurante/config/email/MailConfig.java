@@ -10,7 +10,7 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-    private Dotenv dotenv = Dotenv.load();
+    private final Dotenv dotenv = Dotenv.load();
 
     public JavaMailSender createMailSender(String provider) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

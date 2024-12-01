@@ -36,30 +36,25 @@ Tenha uma conta no [mailtrap](https://mailtrap.io/) para envio de emails (opcion
     ```bash
    .\copy_examples.sh
     ```
-4. Abra o arquivo `src/main/resources/.env`e preencha com os seus dados. Deixei por padrão assim:
+4. Abra o arquivo `src/main/resources/aplication.properties` e preencha com os seus dados. Deixei por padrão assim:
+   ![mysql-aplication.properties](docs/mysql-auth.png)
 
-   ![env](docs/env.png)
+-Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/), abra `src/main/resources/.env` e preencha com os dados do seu inbox
 
--Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/), e preencha este arquivo com os dados do seu inbox
+![Modelagem do Banco de Dados](docs/env.png)
+5. Crie um banco de dados no Mysql com o nome que você definiu no arquivo `src/main/resources/aplication.properties` e deixe o MySQL rodando
 
-5. Execute este comando para carregar as variáveis de ambiente definidas no .env
-    ```bash
-   .\env_setup.sh
-    ```
-
-6. Crie um banco de dados no Mysql com o nome que você definiu no arquivo `src/main/resources/aplication.properties` e deixe o MySQL rodando
-
-7. Execute o comando para construir o projeto com Gradle:
+6. Execute o comando para construir o projeto com Gradle:
     ```bash
     gradlew build
     ```
 
-8. Execute a aplicação:
+7. Execute a aplicação:
     ```bash
     gradlew bootRun
     ```
 
-9. Acesse a API através do endereço `http://localhost:8080` com suas respectivas rotas num cliente http (como o Postman) e faça as requisicões em [casos de uso](#casos-de-uso)
+8. Acesse a API através do endereço `http://localhost:8080` com suas respectivas rotas num cliente http (como o Postman) e faça as requisicões em [casos de uso](#casos-de-uso)
 
 
 

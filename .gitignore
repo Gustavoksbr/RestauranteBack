@@ -38,6 +38,6 @@ out/
 
 ## informacoes sigilosas
 
-*.env
-*.pub
+.env
 *.key
+application.properties
