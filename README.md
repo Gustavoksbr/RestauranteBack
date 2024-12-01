@@ -38,8 +38,6 @@ Tenha uma conta no [mailtrap](https://mailtrap.io/) para envio de emails (opcion
     ```
 4. Abra o arquivo src/main/resources/.env e preencha com os seus dados. Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/) e preencha os campos de email do .env com os dados de um inbox seu
 
-    * obs: o campo `spring.datasource.url` deve ser preenchido com o nome do banco de dados que você deseja criar. 
-
    ![Modelagem do Banco de Dados](docs/env.png)
 
 5. Crie um banco de dados no Mysql com o nome que você definiu no arquivo .env e deixe o MySQL rodando
