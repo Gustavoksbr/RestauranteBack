@@ -37,11 +37,13 @@ Tenha uma conta no [mailtrap](https://mailtrap.io/) para envio de emails (opcion
    .\copy_examples.sh
     ```
 4. Abra o arquivo `src/main/resources/aplication.properties` e preencha com os seus dados. Deixei por padrão assim:
+
    ![mysql-aplication.properties](docs/mysql-auth.png)
 
 -Caso você queira testar 2 fatores, crie uma conta no [mailtrap](https://mailtrap.io/), abra `src/main/resources/.env` e preencha com os dados do seu inbox
 
 ![Modelagem do Banco de Dados](docs/env.png)
+
 5. Crie um banco de dados no Mysql com o nome que você definiu no arquivo `src/main/resources/aplication.properties` e deixe o MySQL rodando
 
 6. Execute o comando para construir o projeto com Gradle:
